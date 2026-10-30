@@ -1,0 +1,130 @@
+Changelog
+=========
+
+This SoloCraft version starts from Extended Character Stats 5.5.2
+(https://www.curseforge.com/wow/addons/extended-character-stats/files/8646156)
+by BreakBB and Ethulu. The same release is on GitHub
+(https://github.com/BreakBB/ExtendedCharacterStats/releases/tag/v5.5.2).
+
+Kept from 5.5.2
+---------------
+
+* Mana regen is added once. 5.3.8 stopped adding it a second time.
+
+* Shadow Focus hit is correct at 4 and 5 points. 5.4.3 fixed those
+  two ranks.
+
+* Spell damage shows the bonus shared by every magic school, and
+  enemy miss has its own rows. 5.5.0 added those rows and corrected
+  boss avoidance.
+
+* A spell-crit buff is added once. 5.5.2 fixed buffs that had been
+  added twice.
+
+* Glancing chance and glancing damage were already on the Classic
+  page of 5.5.2. So were Combustion, the Fire Blast buff, Benediction,
+  and five pieces of The Ten Storms, all inside spell crit.
+
+* Mana kept while casting was already included for Meditation, Arcane
+  Meditation, and Reflection. The Earthshatterer 8-piece was too:
+  15 mana per 5 while Lightning Shield is up.
+
+Removed from 5.5.2
+------------------
+
+The Classic page of 5.5.2 already hides hit rating, haste rating,
+expertise, armor penetration, resilience, and defense rating. This
+version leaves those rows out. Hit is a percentage. Defense is your
+defense skill. Haste is casting speed from buffs such as Mind
+Quickening.
+
+5.5.2 still applied a few later-game effects when a character had
+them. This version leaves them out.
+
+* Season of Discovery rune engravings, and the extra haste on
+  timeworn items.
+* Wrath of the Lich King glyph effects, such as a glyph changing
+  Barkskin.
+* Mana per 5 from socketed gems.
+* Balance of Power, Survival of the Fittest, and the shaman talent
+  Elemental Precision. A vanilla character cannot take those talents.
+  The mage talent Elemental Precision is still included.
+
+Changed for SoloCraft
+---------------------
+
+5.5.2 reads several of these numbers from the client. On SoloCraft
+those client numbers are 0, so this version calculates them. A few of
+5.5.2's own formulas are different too.
+
+Melee and ranged miss
+    At 300 weapon skill against a boss, miss is 8% with no hit.
+    5.5.2 showed 9%. The first 1% of hit does not lower that 8%, and
+    9% hit clears it. Dual wield adds 19%. Miss stays between 0% and
+    60%, and drops against a creature below level 10.
+
+    In cat or bear form, weapon skill counts as 5 per level. Miss is
+    5% against your level and 8% against a boss, before hit. 5.5.2
+    used 9% for cat and bear against a boss, and an off-hand swing
+    could still add 19%.
+
+Spell miss
+    Still starts at 4% against your level and 17% against a boss, and
+    it still cannot fall below 1%. It now stops at 78%. 5.5.2 stopped
+    at 90%.
+
+Melee hit
+    Adds Surefooted, paladin Precision, and the hit written on your
+    gear. 5.5.2 already added Nature's Guidance and rogue Precision.
+
+Ranged hit
+    Adds Surefooted, hit on your gear, and ranged-only hit such as
+    the "+1% Hit" on Falcon's Call. 5.5.2 already counted the
+    Biznicks 247x128 Accurascope.
+
+Spell hit
+    Adds the spell-hit lines on your gear. 5.5.2 already added Arcane
+    Focus, Shadow Focus, mage Elemental Precision, and Nature's
+    Guidance.
+
+Spell crit
+    Built from intellect. A level 60 mage with 382 intellect is about
+    10.8%. Warriors, rogues, and hunters gain none from intellect.
+    This version also adds Songflower Serenade, Slip'kik's Savvy, the
+    mage Power of the Guardian, Brilliant Wizard Oil, Rallying Cry of
+    the Dragonslayer, Moonkin Aura, and Tidal Mastery. Tidal Mastery
+    is 1% nature crit per rank for healing and lightning. Devastation
+    stays on fire crit only, as in 5.5.2.
+
+Healing power
+    The shared spell damage, plus healing-only gear, plus the priest
+    Power of the Guardian. 5.5.2 used the client's healing number,
+    which is 0 on SoloCraft.
+
+Block value
+    Your shield and other block on your gear, plus strength / 20,
+    minus 1. Paladin Shield Specialization then adds 10% per rank, or
+    shaman Shield Specialization adds 5% per rank. 5.5.2 used the
+    client's block value, which is 0 on SoloCraft.
+
+Spell penetration
+    Shown here. The Classic page of 5.5.2 did not show it. It is the
+    green line on your gear that lowers a target's resistances, plus
+    5 per rank of Arcane Subtlety.
+
+Ranged attack power
+    Calculated, because the client number is 0 for every class on
+    SoloCraft. A hunter is level × 2 + agility × 2 − 10. A rogue or
+    warrior is level + agility − 10. Every other class is agility −
+    10. A druid in cat or bear gets none of that base. Gear, enchants,
+    set bonuses, and ranged buffs are added on top: Aspect of the
+    Hawk, Trueshot Aura, Earthstrike, Slayer's Crest, and each stack
+    of Jom Gabbar.
+
+Spirit mana
+    Uses vanilla's regen. A shaman's flat amount is 17 mana per 2
+    seconds. The character sheet's own spirit regen is 1 mana per
+    second low for a shaman, and low for every class below level 60.
+
+Earthshatterer
+    The 4-piece adds 25% to Mana Spring.

@@ -1,0 +1,58 @@
+## Interface: 11402
+## Title: Extended Character Stats v5.5.2
+## Version: 5.5.2
+## Author: BreakBB, Ethulu, Balf (SoloCraft)
+## Notes: Displays an extra window with more information about your characters stats ( Crit/Hit/Block etc )
+## OptionalDeps: Ace3, CallbackHandler-1.0, LibStub
+## SavedVariablesPerCharacter: ExtendedCharacterStats
+## DefaultState: enabled
+## Category: User Interface
+## X-Curse-Project-ID: 334877
+## X-Wago-ID: e56nwDK9
+
+embeds.xml
+
+# ModuleLoader
+Modules\ModuleLoader.lua
+
+# Main
+ECS.lua
+
+# Modules
+Modules\Migration.lua
+Modules\EventHandler.lua
+Modules\Init.lua
+Modules\Utils.lua
+Modules\Stats.lua
+Modules\StatsLayout.lua
+Modules\GearInfos.lua
+Modules\Profile.lua
+Modules\ProfileSpell.lua
+Modules\SlashCommands.lua
+
+# Data
+Modules\Data\Constants.lua
+Modules\Data\Aura.lua
+Modules\Data\Data.lua
+Modules\Data\DataUtils.lua
+Modules\Data\GearLines.lua
+Modules\Data\ItemSets.lua
+Modules\Data\General.lua
+Modules\Data\Defense.lua
+Modules\Data\Melee.lua
+Modules\Data\MP5.lua
+Modules\Data\Ranged.lua
+Modules\Data\SpellCrit.lua
+Modules\Data\SpellDamage.lua
+Modules\Data\SpellHit.lua
+Modules\Data\SpellPenetration.lua
+
+# Config
+Modules\Config\Config.lua
+Modules\Config\GeneralSection.lua
+Modules\Config\MeleeSection.lua
+Modules\Config\RangeSection.lua
+Modules\Config\DefenseSection.lua
+Modules\Config\ManaSection.lua
+Modules\Config\SpellSchoolsSection.lua
+Modules\Config\SpellSection.lua

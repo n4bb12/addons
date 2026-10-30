@@ -1,0 +1,7 @@
+## Interface: 11402
+## Title: Whisper Dash Fix
+## Notes: Drops the empty realm dash the 1.14 client sometimes adds to a whisper name.
+## Author: Balf
+## DefaultState: enabled
+
+WhisperDashFix.lua

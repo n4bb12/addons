@@ -1,0 +1,22 @@
+## Interface: 11200
+## Title: Extended Character Stats
+## Author: Balf
+## DefaultState: Enabled
+## Notes: Displays an extra window with more information about your characters stats ( Crit/Hit/Block etc )
+## SavedVariablesPerCharacter: ExtendedCharacterStats
+
+events.lua
+hook.lua
+rules.lua
+lines.lua
+scan.lua
+melee.lua
+ranged.lua
+defense.lua
+spell.lua
+mana.lua
+profile.lua
+rows.lua
+gear.lua
+frame.lua
+config.lua

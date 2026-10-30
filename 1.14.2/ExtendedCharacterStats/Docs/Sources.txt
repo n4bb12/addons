@@ -1,0 +1,296 @@
+Sources
+=======
+
+Talents, buffs, and items that change a number on the panel.
+
+Included means the number on the panel contains this effect.
+
+Each school has one number. That number is for bonuses that cover the
+whole school.
+
+Melee crit, ranged crit, attack power, armor, dodge, parry, and block
+chance already include the talents the game applies to them. This
+window calculates spell crit, spell hit, Nature's Guidance, Precision,
+Surefooted, spell penetration, block value, and crit reduction.
+
+Miss and glancing use your weapon skill against the target's defense.
+A low skill is a high miss chance.
+
+Talents
+-------
+
+Druid
+-----
+
+Gift of Nature [not included]
+    Makes the heal larger. Healing on the panel is the bonus on your
+    gear.
+
+Improved Moonfire [not included]
+    Moonfire crit only. The nature line would claim it for every
+    nature spell.
+
+Improved Regrowth [not included]
+    Regrowth crit only.
+
+Moonkin Form [not included]
+    The talent shapeshifts you and brings up Moonkin Aura. The crit
+    is on the aura, while it is up.
+
+Reflection [included]
+    Each rank keeps 5% of your spirit regen while you are casting.
+
+Hunter
+------
+
+Surefooted [included]
+    Each rank is 1% hit, on melee and ranged. Dodge stays in your
+    dodge chance.
+
+Killer Instinct [included]
+    Each rank is 1% crit on melee and ranged. Your crit chance
+    already includes it.
+
+Mage
+----
+
+Arcane Focus [included]
+    Each rank is 2% arcane hit. Fire and frost stay as they are.
+
+Arcane Instability [included]
+    Each rank is 1% spell crit, on every school.
+
+Arcane Meditation [included]
+    Each rank keeps 5% of your spirit regen while you are casting.
+
+Arcane Subtlety [included]
+    Each rank is 5 spell penetration.
+
+Critical Mass [included]
+    Each rank is 2% fire crit.
+
+Elemental Precision [included]
+    Each rank is 2% fire hit and 2% frost hit. Arcane hit stays on
+    Arcane Focus.
+
+Improved Arcane Explosion [not included]
+    Arcane Explosion crit only.
+
+Improved Flamestrike [not included]
+    Flamestrike crit only.
+
+Incinerate [not included]
+    The extra crit is on Fire Blast and Scorch only. The fire line
+    would claim it for every fire spell.
+
+Winter's Chill [not included]
+    A debuff on the target, +2% frost crit taken per stack. Your own
+    frost crit does not move.
+
+Paladin
+-------
+
+Conviction [included]
+    Melee crit, and your crit chance already includes it.
+
+Divine Favor [not included]
+    Your next holy spell is a guaranteed crit. One charge.
+
+Holy Power [included]
+    Each rank is 1% holy crit.
+
+Precision [included]
+    Each rank is 1% melee hit. Paladin Precision covers melee weapons.
+
+Purification [not included]
+    Makes the heal larger. Healing on the panel is the bonus on your
+    gear.
+
+Shield Specialization [included]
+    Each rank is 10% more block value, so the ranks are 10%, 20%, and
+    30% more. That bonus is applied before the value is cut to a
+    whole number.
+
+Priest
+------
+
+Darkness [not included]
+    Each rank is 2% more shadow damage. The shadow line is your flat
+    spell power. Darkness multiplies the finished spell, including
+    its own base damage, so folding it into spell power would be the
+    wrong number.
+
+Force of Will [not included]
+    Each rank is 1% damage and 1% crit on Smite, Holy Fire, Holy
+    Nova, Mind Blast, Mana Burn, and Touch of Weakness damage. It
+    does not cover other heals, Power Word: Shield, Mind Flay,
+    Shadow Word: Pain, or Devouring Plague. Holy crit and shadow crit
+    are each one number for the whole school, so Force of Will is not
+    added to those lines.
+
+Holy Specialization [included]
+    Each rank is 1% holy crit.
+
+Inner Focus [not included]
+    Your next spell is a guaranteed crit and costs no mana. One
+    charge.
+
+Meditation [included]
+    Each rank keeps 5% of your spirit regen while you are casting.
+
+Spiritual Guidance [included]
+    Each rank adds 5% of your spirit to spell damage, as a whole
+    number. It is already inside your spell damage.
+
+Shadow Focus [included]
+    Each rank is 2% shadow hit, for the whole shadow school.
+
+Spiritual Healing [not included]
+    Makes the heal larger. Healing on the panel is the bonus on your
+    gear.
+
+Rogue
+-----
+
+Precision [included]
+    Each rank is 1% melee hit. This is a different talent from the
+    paladin one.
+
+Sleight of Hand [included]
+    Each rank is 1% less chance to be crit by melee and ranged
+    attacks. It is added to melee and ranged crit reduction.
+
+Shaman
+------
+
+Call of Thunder [not included]
+    The crit is for Lightning Bolt and Chain Lightning only: 1%, 2%,
+    3%, 4%, then 6%. The nature line is also your heal line, so this
+    would overstate Healing Wave, Lesser Healing Wave, and Chain Heal.
+
+Elemental Mastery [not included]
+    Your next fire, frost, or nature damage spell is a guaranteed
+    crit and costs no mana. One charge.
+
+Elemental Precision [not included]
+    Shamans in vanilla do not learn this talent. The mage talent
+    with this name is a separate row.
+
+Nature's Guidance [included]
+    Each rank is 1% melee hit and 1% spell hit, on every school.
+
+Shield Specialization [included]
+    Each rank is 5% more block value. Your block chance already
+    includes the 1% block per rank.
+
+Thundering Strikes [included]
+    Melee crit, and your crit chance already includes it.
+
+Tidal Mastery [included]
+    Each rank is 1% nature crit for healing and lightning. Earth
+    Shock is nature damage and sits outside the talent, so that one
+    spell reads high.
+
+Warlock
+-------
+
+Devastation [included]
+    1% fire crit per rank. The talent covers every Destruction spell,
+    including Shadow Bolt and Shadowburn. Fire crit includes it.
+    Shadow crit is the whole shadow school, and the Affliction shadow
+    spells are not Destruction, so shadow crit does not include
+    Devastation.
+
+Improved Searing Pain [not included]
+    Searing Pain crit only, and it stacks with Devastation for that
+    spell. The fire line would claim it for Immolate, Conflagrate,
+    Soul Fire, Rain of Fire, and Hellfire.
+
+Shadow Mastery [not included]
+    Extra damage on the finished spell, separate from flat spell
+    power. With Shadow Mastery at 5/5, spell damage still reads the
+    same number on every school. Damage-percent talents such as
+    Darkness work the same way.
+
+Suppression [not included]
+    Each rank is 2% against resists on Affliction spells: curses,
+    Corruption, the drains, Fear, and Siphon Life. Shadow Bolt is
+    Destruction. Shadow hit is the whole school.
+
+Warrior
+-------
+
+Shield Specialization [included]
+    Your block chance already includes it. Blocking with this talent
+    also gives rage. Block value is unchanged.
+
+Buffs and items
+---------------
+
+Rallying Cry of the Dragonslayer [included, any class]
+    +10% spell crit on every school, plus 5% melee and ranged crit
+    and 140 attack power. Your melee and ranged crit already include
+    that 5%.
+
+Moonkin Aura [included]
+    +3% spell crit on every school, on the druid and on nearby party
+    members, while the aura is up.
+
+Combustion [included]
+    Each stack is 10% fire crit, while the buff is up.
+
+Fire Blast [included]
+    While the Fire Blast buff is on you, fire crit includes an extra
+    50%.
+
+Songflower Serenade [included, any class]
+    +5% spell crit. Melee crit and ranged crit already include that
+    same 5%. Strength, agility, stamina, intellect, and spirit
+    already include the +15.
+
+Slip'kik's Savvy [included, any class]
+    +3% spell crit. Melee and ranged crit are unchanged.
+
+Power of the Guardian
+    Depends on who is wearing the charm.
+
+    Mage [included]
+        +2% spell crit, while the buff is on you. Hazza'rah's Charm
+        of Magic grants that buff. Wearing the charm alone does not.
+
+    Warlock [included]
+        +33 spell damage and healing. That is already inside your
+        spell damage.
+
+    Priest [included]
+        +62 healing, added to healing power.
+
+    Druid [included]
+        11 mana per 5, on MP5 (Buffs).
+
+Brilliant Wizard Oil [included, any class]
+    For 30 minutes, spell damage includes +36 and spell crit includes
+    +1%.
+
+Benediction [included]
+    +2% holy crit while it is in your main hand.
+
+The Ten Storms [included]
+    5 pieces. +3% nature crit.
+
+The Earthshatterer [included]
+    Four pieces add 25% more mana from Mana Spring. Eight pieces add
+    15 mana per 5 while Lightning Shield is up, on MP5 (Buffs). Mana
+    Spring itself is on the casting totals.
+
+Blessing of Wisdom [included, any class]
+    Ranks 1-6, and Greater Blessing of Wisdom ranks 1-2. The amount
+    on the buff is added to your mana while casting and while not
+    casting. MP5 (Buffs) is flat mana per 5, so Wisdom is not on that
+    row. The amount follows the paladin who blessed you.
+
+Mana Spring [included, any class]
+    Ranks 1-4 restore 4, 6, 8, and 10 mana every 2 seconds. Ancient
+    Mana Spring restores 27. Like Blessing of Wisdom, it is added to
+    mana while casting and to mana while not casting. The
+    Earthshatterer 4-piece adds 25%.

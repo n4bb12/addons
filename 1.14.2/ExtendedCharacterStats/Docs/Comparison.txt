@@ -1,0 +1,549 @@
+Compared with 3.0.9
+==========================
+
+Spell crit
+----------
+
+Spell crit
+    3.0.9
+        One level-60 ratio. A mage with 382 intellect is about 6.6%.
+        A paladin is 1% per 29.5 intellect. 3.0.9 attributes those
+        ratios to the Wowhead Classic gear planner.
+
+    This addon
+        base + intellect / (rate0 + rate1 × level). The base and the
+        two rates change by class, and the second rate grows with
+        level. That mage is about 10.8%.
+
+    Why
+        vMaNGOS Unit::GetSpellCritFromIntellect is the roll the 1.12
+        server uses. The level-60 ratio is a shortcut, and the
+        paladin ratio does not match that roll.
+
+Devastation
+    3.0.9
+        1% spell crit per rank on every school.
+
+    This addon
+        Fire crit only.
+
+    Why
+        The talent is every Destruction spell. Shadow Bolt and
+        Shadowburn are Destruction. The Affliction shadow spells are
+        not, so a shadow line would include the bonus on spells that
+        do not have it.
+
+Force of Will
+    3.0.9
+        1% spell crit on every school, and 1% spell damage per rank.
+
+    This addon
+        Not on the school lines.
+
+    Why
+        It covers some offensive spells only, so a school line would
+        include the bonus on spells that do not have it. The damage
+        percent is separate from flat spell damage.
+
+Tidal Mastery
+    3.0.9
+        Not included.
+
+    This addon
+        1% nature crit per rank.
+
+    Why
+        Healing and lightning are nature.
+
+Combustion
+    3.0.9
+        Named, and the stacks are not added to fire crit. The bonus
+        is stored as spell crit for one school, and the buff loop
+        only reads a buff's all-schools spell crit.
+
+    This addon
+        10% fire crit per stack.
+
+    Why
+        The buff is fire crit, and each stack adds another 10%.
+
+Fire Blast
+    3.0.9
+        Not included.
+
+    This addon
+        +50% fire crit while the buff is on you.
+
+    Why
+        The buff is fire crit.
+
+Songflower, Slip'kik's Savvy, mage Power of the Guardian, Brilliant Wizard Oil
+    3.0.9
+        Songflower is +5% spell crit, Slip'kik's Savvy is +3%, the
+        mage Power of the Guardian is +2%, and Brilliant Wizard Oil
+        is +1%.
+
+    This addon
+        The same four.
+
+    Why
+        Spell crit is calculated, so these bonuses have to be added
+        while the buff or oil is up. Melee crit and ranged crit
+        already include Songflower's 5%.
+
+Spell damage, hit, attack power, and block
+------------------------------------------
+
+Spell damage and healing
+    3.0.9
+        Rebuilt from gear, then multiplied by percent talents such as
+        Shadow Mastery and Spiritual Healing.
+
+    This addon
+        The flat spell damage on your character. Healing is that
+        number, plus healing-only gear and healing-only buffs.
+        GetSpellBonusHealing() stays 0.
+
+    Why
+        Checked in game: with Shadow Mastery at 5/5, spell damage
+        reads the same number on every school, so those percents are
+        not in the field. Spiritual Healing multiplies the heal when
+        it lands. It is not +healing. GetSpellBonusHealing() stays 0
+        because the 1.12 object has no healing-done field.
+
+Hit
+    3.0.9
+        GetHitModifier() is treated as broken and is not used. Arcane
+        Focus, Elemental Precision, and Shadow Focus are not added.
+        Surefooted is ranged only. Against a boss, miss starts at 9%
+        and then another 1% of hit is removed when weapon skill is
+        under 305. Ranged hit is
+        GetCombatRatingBonus(CR_HIT_RANGED). A vanilla character has
+        no hit rating, so ranged hit shows 0.
+
+    This addon
+        GetHitModifier(), plus those talents on the schools they
+        cover, and Surefooted on melee and ranged. Ranged hit uses
+        that same hit chance, the Biznicks scope, and hit on gear.
+        Against a boss, miss is 8% with no hit. The first 1% of hit
+        does not lower that 8%.
+
+    Why
+        Hermes forwards some hit auras, so the client hit is kept.
+        Surefooted has no weapon restriction. Arcane Focus is arcane,
+        Elemental Precision is fire and frost, and Shadow Focus is
+        shadow. The 9% boss miss already includes the 1% of hit
+        vanilla ignores, so removing it again counts that 1% twice.
+
+Ranged attack power
+    3.0.9
+        The hunter, rogue, or warrior base, and one stack of Jom
+        Gabbar. Set bonuses, "Attack Power +26 and +1% Critical
+        Strike", and Aspect of the Hawk are not counted.
+
+    This addon
+        That same base, plus gear, enchants, set bonuses, and the
+        ranged buffs. Cryptstalker 4-piece is +50. Jom Gabbar is
+        counted per stack. Every other class is agility − 10. A
+        druid in cat or bear has no base from level or agility.
+        UnitRangedAttackPower is 0 for every class, so this sum is
+        what the row shows. A client value above 0 is kept.
+
+    Why
+        The 1.12 object has no ranged attack power field.
+        Cryptstalker and that shoulder enchant belong in the total,
+        and each Jom Gabbar stack is its own bonus. The base is
+        vMaNGOS Unit::GetAttackPowerFromStrengthAndAgility.
+
+Melee attack power and defense
+    3.0.9
+        A formula when attack power is 0. Defense below 5 per level
+        is raised up to 5 per level.
+
+    This addon
+        The attack power and defense skill on your character.
+
+    Why
+        UnitAttackPower and UnitDefense read fields on the 1.12
+        object, and Hermes fills them. A low attack power or a low
+        defense skill is the number you actually have.
+
+Block value
+    3.0.9
+        Strength / 20, and paladin Shield Specialization only.
+
+    This addon
+        (shield and gear block + strength / 20 − 1) × Shield
+        Specialization. The result is never below 0, and it is cut to
+        a whole number. Shaman Shield Specialization is 5% per rank.
+        Paladin Shield Specialization is 10% per rank.
+
+    Why
+        vMaNGOS Player::GetShieldBlockValue. The minus 1 comes before
+        the talent. Before the talent, 3.0.9 is 1 higher.
+
+Crit reduction, avoidance, and mana
+-----------------------------------
+
+Crit reduction
+    3.0.9
+        No crit reduction row.
+
+    This addon
+        1% per 25 defense above 300 at level 60 for melee and ranged,
+        plus buffs and Sleight of Hand. Spell crit reduction comes
+        from buffs.
+
+    Why
+        Defense skill reduces melee and ranged crit taken. In
+        vanilla, defense does not reduce spell crit.
+
+Avoidance
+    3.0.9
+        One figure, against an attacker of your level, from the raw
+        client dodge, parry, and block.
+
+    This addon
+        One row against your level and one against a boss. Against a
+        boss, dodge, parry, and block in that total are each 0.6%
+        lower. Enemy miss has the same two rows.
+
+    Why
+        The dodge, parry, and block rows are against your level.
+        Enemy miss is 5% plus 0.04% per point of defense above the
+        attacker's weapon skill.
+
+Spirit mana
+    3.0.9
+        The first 50 spirit at 0.25 mana per second, then a class
+        rate. Shaman is 0.1. Druid is 0.1125.
+
+    This addon
+        Vanilla's regen, spirit / divisor + a flat amount, shown as
+        mana per 5. A shaman's flat amount is 17 mana per 2 seconds.
+
+    Why
+        vMaNGOS Unit::GetRegenMPPerSpirit. Above 50 spirit the two
+        rates match, except a shaman in 3.0.9 is 1 mana per second
+        low and a druid is high. GetManaRegen() has that same shaman
+        gap, and it is low for every class below level 60.
+
+Earthshatterer
+    3.0.9
+        4 pieces, +25% Mana Spring, and no 8-piece.
+
+    This addon
+        4 pieces, +25% Mana Spring, and 8 pieces, +15 mana per 5
+        while Lightning Shield is up.
+
+    Why
+        Both bonuses are part of the set.
+
+Blessing of Wisdom
+    3.0.9
+        Scaled by your own Improved Blessing of Wisdom.
+
+    This addon
+        The mana amount written on the buff, while casting and while
+        not casting.
+
+    Why
+        The talent belongs to the paladin who cast the buff, so your
+        own points are the wrong scale when someone else cast it.
+        MP5 (Buffs) is flat mana per 5, so Wisdom sits on the casting
+        rows.
+
+Glancing, schools, and haste
+    3.0.9
+        No glancing rows. One spell hit for every school, one spell
+        crit for every school. Haste is hidden, and the value behind
+        it is 0.
+
+    This addon
+        Glancing chance and glancing damage, against your level and
+        against a boss. Spell hit, spell miss, and spell crit each
+        have a line per school. Haste is casting speed from buffs
+        such as Mind Quickening.
+
+    Why
+        Glancing is a melee roll. A school talent covers one school.
+        Haste rating is not a vanilla stat. Casting speed from a
+        buff is.
+
+Figures players asked for on 3.0.9
+----------------------------------
+
+Spell crit
+    Note
+        Mage crit per intellect showed 59.2, and should be 59.5.
+
+    Why that figure is wrong
+        Both numbers are level-60 ratios. 3.0.9 says they come from
+        the Wowhead Classic gear planner, and 59.2 is that planner's
+        shaman ratio. Neither is the crit the 1.12 server rolls.
+
+    This addon
+        base + intellect / (rate0 + rate1 × level). The base and the
+        two rates change by class, and the second rate grows with
+        level.
+
+    Why
+        At 60 a mage is about 53.8 intellect per 1%, plus a 3.70%
+        base, so 382 intellect is about 10.8%.
+
+    Source
+        vMaNGOS Unit::GetSpellCritFromIntellect.
+
+Healing power
+    Note
+        1358 healing on gear and 393 spirit showed as 1602, and
+        should be 1456 (0.25 × 393 + 1358).
+
+    Why that figure is wrong
+        1602 is 1456 × 1.10. Spiritual Healing 5/5 had been applied
+        to healing power, and that talent multiplies the heal when it
+        lands.
+
+    This addon
+        Shared spell damage plus healing-only gear. Spiritual Healing
+        is not applied. Spiritual Guidance is already inside spell
+        damage, and it is not added a second time.
+
+    Why
+        25% of spirit is cut to a whole number. Checked on Cloetta:
+        Spiritual Guidance 5/5, 358 spirit, Atiesh +120, and every
+        school reads 209. floor(358 × 0.25) is 89.
+
+    Source
+        vMaNGOS SpellCaster::SpellBaseDamageBonusDone adds
+        spirit-percent auras to the spell damage field.
+        GetSpellBonusHealing() stays 0. The 1.12 object has no
+        PLAYER_FIELD_MOD_HEALING_DONE_POS field.
+
+Spell damage and frost enchants
+    Note
+        A weapon "spell damage +30" and the frost-only lines were not
+        counted.
+
+    Why that figure is wrong
+        A flat bonus on the character belongs on the panel.
+
+    This addon
+        No tooltip scan. Spell damage is GetSpellBonusDamage(), and
+        that field already includes the +30. A frost enchant is the
+        extra in parentheses on the frost line. Checked in game:
+        Frost Damage +20 on gloves is the frost line only, as in
+        733 (+20).
+
+    Why
+        The server writes each flat spell damage bonus it applies
+        into that field. The +30 is shared by every magic school.
+        The +20 is frost only.
+
+    Source
+        GetSpellBonusDamage(), PLAYER_FIELD_MOD_DAMAGE_DONE_POS, and
+        vMaNGOS Player::UpdateSpellDamageAndHealingBonus.
+
+Blessing of Wisdom
+    Note
+        Blessing of Wisdom did not show.
+
+    Why that figure is wrong
+        The buff restores mana, so the mana totals were short.
+
+    This addon
+        Ranks 1-6 and Greater Blessing of Wisdom ranks 1-2, read from
+        the buff, added while casting and while not casting.
+
+    Why
+        MP5 (Buffs) is flat mana per 5. Wisdom is on the two mana
+        totals.
+
+    Source
+        The mana amount on the buff tooltip.
+
+Block value
+    Note
+        The block value on 3.0.9 was wrong.
+
+    Why that figure is wrong
+        Strength / 20 is 1 higher before the talent, and shaman
+        Shield Specialization was left out.
+
+    This addon
+        (shield and gear block + strength / 20 − 1) × Shield
+        Specialization, never below 0, cut to a whole number. Shaman
+        is 5% per rank.
+
+    Why
+        The server subtracts 1 after strength / 20, then applies the
+        talent.
+
+    Source
+        vMaNGOS Player::GetShieldBlockValue.
+
+Ranged attack power
+    Note
+        It showed 0, so Cryptstalker and the shoulder enchant could
+        not be checked.
+
+    Why that figure is wrong
+        UnitRangedAttackPower is 0 for every class on SoloCraft. The
+        1.12 object has no ranged attack power field, so Cryptstalker
+        and the shoulder enchant had nothing to sit on.
+
+    This addon
+        Built when that call is 0. The class base, plus gear,
+        Cryptstalker 4-piece (+50), "Attack Power +26", and the
+        ranged buffs. Hunter is level × 2 + agility × 2 − 10. Rogue
+        and warrior are level + agility − 10. Every other class is
+        agility − 10. A druid in cat or bear has no base from level
+        or agility. A client value above 0 is kept.
+
+    Why
+        That base is the ranged attack power before gear. The gear
+        and buffs sit on top of it.
+
+    Source
+        vMaNGOS Unit::GetAttackPowerFromStrengthAndAgility.
+
+Ranged hit
+    Note
+        Hunter ranged hit was missing, including the Zul'Gurub helm
+        and leg enchant.
+
+    Why that figure is wrong
+        3.0.9 read ranged hit from hit rating, which a vanilla
+        character does not have, and it did not count that enchant.
+
+    This addon
+        Your hit, plus Surefooted, the Biznicks scope, hit on gear,
+        and "Ranged Attack Power +24/Stamina +10/Hit +1%".
+
+    Why
+        That enchant is ranged hit only. Surefooted is 1% per rank
+        and has no weapon restriction.
+
+    Source
+        GetHitModifier(), the Surefooted talent text, and that
+        enchant line.
+
+Melee hit
+    Note
+        Melee hit was wrong.
+
+    Why that figure is wrong
+        Nature's Guidance, Precision, and Surefooted were missing
+        from the total.
+
+    This addon
+        Your hit, plus those three talents, plus the hit lines on
+        gear.
+
+    Why
+        Hermes already forwards the hit auras it has. Those talents
+        are 1% hit per rank, from the talent text, and
+        GetHitModifier() does not include them.
+
+    Source
+        GetHitModifier(), and those talent texts.
+
+Spell hit
+    Note
+        Spell hit was wrong. The mage Zul'Gurub "Spell Hit +1%" was
+        already counted.
+
+    Why that figure is wrong
+        GetSpellHitModifier() does not include the school talents.
+
+    This addon
+        Your spell hit, plus that school's talents, plus "Spell Hit
+        +1%" and "chance to hit with spells by N%".
+
+    Why
+        Arcane Focus is arcane. Elemental Precision is fire and
+        frost. Shadow Focus is shadow.
+
+    Source
+        GetSpellHitModifier(), plus the talent text.
+
+Spell penetration
+    Note
+        Spell penetration was wrong.
+
+    Why that figure is wrong
+        GetSpellPenetration() stays 0. The 1.12 object has no
+        mod-target-resistance field, so Hermes never fills it.
+
+    This addon
+        The green line "decreases the magical resistances of your
+        spell targets by N", plus 5 per rank of Arcane Subtlety.
+
+    Why
+        The green line is the penetration the server applies. The
+        talent adds 5 per rank.
+
+    Source
+        The equip tooltip, and the Arcane Subtlety talent text.
+
+Healing enchants
+    Note
+        Healing enchants were not counted.
+
+    Why that figure is wrong
+        GetSpellBonusHealing() stays 0, so a healing enchant has no
+        client field to show up in.
+
+    This addon
+        "Healing Spells +55", "Healing +31 and 5 mana per 5 sec.",
+        and Prophetic Aura.
+
+    Why
+        Those lines are healing that is not already inside spell
+        damage.
+
+    Source
+        Those tooltip lines. The missing field is
+        PLAYER_FIELD_MOD_HEALING_DONE_POS.
+
+Frost and fire spell damage
+    Note
+        +frost should not be increased by the 6% talent, and Fire
+        Power is the same kind of talent.
+
+    Why that figure is wrong
+        Piercing Ice and Fire Power multiply the finished spell.
+
+    This addon
+        The frost line is the flat frost total. A school line shows
+        the amount above shared spell damage in parentheses, as in
+        624 (+46). Those talents are not added on top.
+
+    Why
+        With Shadow Mastery at 5/5, spell damage reads the same
+        number on every school.
+
+    Source
+        GetSpellBonusDamage().
+
+Character totals
+    Note
+        Crit, mana per 5 from spirit, mana per 5 on gear, defense,
+        armor, and attribute enchants were already fine.
+
+    Why that figure is wrong
+        Spirit mana is the exception. 3.0.9 is 1 mana per second low
+        for a shaman and high for a druid. The character sheet's own
+        spirit regen has that same shaman gap, and it is low for
+        every class below level 60.
+
+    This addon
+        Melee crit, armor, defense, and attributes stay the
+        character's own totals. Spirit mana uses vanilla's regen.
+
+    Why
+        Those totals already include gear and enchants.
+
+    Source
+        vMaNGOS Unit::GetRegenMPPerSpirit. A 2 second tick is
+        spirit / divisor + a flat amount.

@@ -1,0 +1,222 @@
+Stats
+=====
+
+What each row on the panel means. A boss is a target three levels
+above you. Talents, buffs, and items are in Sources (SOURCES.txt).
+
+Attack power, melee crit, ranged crit, armor, defense, dodge, parry,
+block chance, and attack speed come from your character. Gear,
+enchants, and set bonuses are already in those numbers. Miss,
+glancing, spell stats, crit reduction, and mana per 5 are calculated
+with the rules under each row.
+
+General
+-------
+
+Movement Speed
+    Your run speed. While you are swimming, it is your swim speed.
+    Either way it is a percent of normal running speed.
+
+Melee
+-----
+
+Hit bonus
+    Your hit, plus the melee hit talents and the hit lines on your
+    gear.
+
+Miss
+    Your chance to miss a creature of your level. At equal weapon
+    skill and defense that chance is 5%. Each point of defense above
+    your weapon skill adds 0.1%. Once defense is more than 10 above
+    your weapon skill, every point of that whole gap is worth 0.2%
+    instead. Your hit comes off the result.
+
+    In that steeper range the first 1% of hit does nothing. One point
+    of hit against a boss still leaves 8% miss, and 9% hit clears it.
+    Dual wield adds 19% on ordinary swings. Against a creature below
+    level 10 the chance scales down with that creature's level. Miss
+    stays between 0% and 60%.
+
+Miss (Lvl + 3)
+    The same chance against a boss. At 300 weapon skill and no hit,
+    that is 8%.
+
+Cat and bear
+    Weapon skill counts as 5 per level. Miss is 5% against your level
+    and 8% against a boss, before hit. Miss (Lvl + 3) still ignores
+    the first 1% of hit.
+
+Glancing chance
+    How often a melee hit against your level, or against a boss, is a
+    glancing blow. At 300 weapon skill that chance is 10% against
+    your level and 40% against a boss. Each point of defense above
+    your weapon skill adds 2%. Weapon skill above 5 per level does
+    not lower it. The chance does not rise above 100%.
+
+Glancing damage
+    How much of your damage a glancing blow deals. At 300 weapon
+    skill that blow deals 95% against your level and 65% against a
+    boss.
+
+Attack power
+    Your melee attack power, buffs included.
+
+Crit chance
+    Your melee crit.
+
+Attack speed
+    Seconds per swing, main hand and off hand.
+
+Ranged
+------
+
+Hit bonus
+    Your hit, plus Surefooted, the Biznicks 247x128 Accurascope (+3%),
+    hit on your gear, and ranged-only hit such as the "+1% Hit" on
+    Falcon's Call.
+
+Miss and Miss (Lvl + 3)
+    The same miss table as melee, from your ranged weapon skill. Dual
+    wield adds nothing here.
+
+Attack power
+    The ranged attack power vanilla gives you. A hunter is
+    level × 2 + agility × 2 − 10. A rogue or warrior is
+    level + agility − 10. Any other class is agility − 10. A druid in
+    cat or bear has none from level and agility. Gear, enchants, and
+    set bonuses such as the Cryptstalker 4-piece (+50) sit on top of
+    that, along with ranged buffs: Aspect of the Hawk, Trueshot Aura,
+    Earthstrike, Slayer's Crest, and each stack of Jom Gabbar. The
+    client number is 0 for every class here. When it is above 0, that
+    number is the row.
+
+Crit chance
+    Your ranged crit.
+
+Attack speed
+    Seconds per shot.
+
+Defense
+-------
+
+Armor
+    Your armor after diminishing returns.
+
+Melee and ranged crit reduction
+    1% for every 25 defense above 5 per level (300 at 60), plus buffs
+    that make you harder to crit, and Sleight of Hand.
+
+Spell crit reduction
+    The reduction from buffs. In vanilla, defense does not reduce
+    your chance to be crit by spells.
+
+Avoidance and Avoidance (Lvl +3)
+    The chance an attack of that level misses you, plus your dodge,
+    parry, and block against an attacker of that level.
+
+Enemy miss and Enemy miss (Lvl +3)
+    5%, plus 0.04% for each point of your defense above the attacker's
+    weapon skill. That is their chance to miss you.
+
+Defense
+    Your defense skill, as the game reports it.
+
+Block chance
+    Your block chance while a shield is equipped.
+
+Block value
+    Your shield's block, other block value on your gear, and
+    strength / 20, then minus 1. Paladin Shield Specialization adds
+    10% per rank and shaman Shield Specialization adds 5% per rank.
+    The talent is applied before the result is cut to a whole number.
+    The result is never below 0.
+
+Parry chance
+    Your parry chance, for classes that can parry.
+
+Dodge chance
+    Your dodge chance.
+
+Note
+    The dodge, parry, and block rows are against an attacker of your
+    level. Each level of the attacker lowers dodge, parry, and block
+    by 0.2%, so in Avoidance (Lvl +3) those three are each 0.6%
+    lower than the rows above.
+
+Spell
+-----
+
+Haste bonus
+    Casting speed from buffs such as Mind Quickening, and slows such
+    as Curse of Tongues.
+
+Spell penetration
+    The green line that lowers your target's resistances, plus 5 per
+    rank of Arcane Subtlety. When several pieces repeat the same green
+    set line, that line counts once.
+
+Hit bonus
+    Your spell hit, plus the talents for the school named on that
+    line, plus the spell-hit lines on your gear. Arcane, fire, frost,
+    nature, holy, shadow, and physical each have their own line.
+
+Miss and Miss (Lvl + 3)
+    Spell miss after spell hit. An equal-level target starts at 4%.
+    A boss starts at 17%. Miss never falls below 1% and never rises
+    above 78%.
+
+Spell damage
+    The flat bonus shared by every magic school. Percent talents stay
+    separate from this number. A warlock with Shadow Mastery at 5/5
+    still shows the same spell damage on every school. A priest's
+    Spiritual Guidance is already in the number.
+
+Healing power
+    That shared spell damage, plus healing-only gear, plus a
+    healing-only buff such as the priest Power of the Guardian. Gift
+    of Nature, Spiritual Healing, and Purification multiply the heal
+    when it lands.
+
+School damage
+    The total for the school named on the line. Anything above the
+    shared spell damage is shown in parentheses, as in 624 (+46). A
+    frost enchant is part of the frost line. Physical damage is its
+    own total.
+
+Spell crit
+    Vanilla's crit chance from intellect, then your talents, gear,
+    and buffs for the school named on the line. Intellect crit is
+    base + intellect / (rate0 + rate1 × level). The base and the two
+    rates change by class, and the second rate grows with level. At
+    60 a mage is about 53.8 intellect per 1%, plus a 3.70% base, so
+    382 intellect is about 10.8%. A level 1 mage is about 5%.
+    Warriors, rogues, and hunters gain no spell crit from intellect.
+
+Mana
+----
+
+MP5 (Items)
+    Mana per 5 seconds from your gear, enchants, and flat set bonuses.
+
+MP5 (Spirit)
+    Mana from spirit, using vanilla's regen. A mage or priest gains
+    spirit / 4 + 12.5 mana per 2 seconds. Most other classes gain
+    spirit / 5 + 15. A shaman gains spirit / 5 + 17. The row turns
+    that 2 second tick into mana per 5 seconds. Next to this row, the
+    character sheet's spirit regen is 1 mana per second low for a
+    shaman, and low for every class below level 60.
+
+MP5 (Buffs)
+    Flat mana per 5 from buffs, and 15 more from the Earthshatterer
+    8-piece while Lightning Shield is up. Blessing of Wisdom and Mana
+    Spring are on the casting rows below.
+
+MP5 (Casting)
+    The share of spirit regen you keep while casting, plus item mana,
+    flat buff mana, Wisdom, and Mana Spring. The Earthshatterer
+    4-piece adds 25% to Mana Spring. The casting share never goes
+    above the full spirit regen.
+
+MP5 (Not casting)
+    Spirit regen, plus mana per 5 from items, plus mana per 5 from
+    buffs, plus Blessing of Wisdom and Mana Spring.

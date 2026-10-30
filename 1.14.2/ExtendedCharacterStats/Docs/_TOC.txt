@@ -1,0 +1,23 @@
+Extended Character Stats
+========================
+
+Extra combat stats beside your character sheet, for vanilla on SoloCraft.
+
+Open the character window. The ECS button shows and hides the panel.
+Settings is at the top of that panel. /ecs toggle and /ecs config do
+the same.
+
+Ranged stats are hidden for paladins and shamans. Mana is hidden for
+warriors and rogues. Block appears while you have a shield. Parry
+appears for classes that can parry.
+
+Hit on the panel is a percentage. Defense is your defense skill. Haste
+is casting speed from buffs such as Mind Quickening.
+
+Contents
+--------
+
+  Changelog.txt     what changed from Extended Character Stats 5.5.2
+  Formulas.txt      what each row means
+  Sources.txt       talents, buffs, and items on each row
+  Comparison.txt    how this window differs from Extended Character Stats 3.0.9
